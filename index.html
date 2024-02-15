@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Web Component Library</title>
+  </head>
+  <body class="text-black font-inter flex flex-col px-4">
+    <div
+      x-data="{ view: 'view2' }"
+      class="w-full flex flex-col sm:flex-row flex-grow overflow-hidden py-8 gap-4"
+    >
+      <aside class="sm:w-1/3 md:1/4 w-full flex-shrink flex-grow-0">
+        <div class="sticky top-0 w-full flex flex-col gap-4">
+          <h1 class="text-sm" x-text="$store.items.name">Web Components Library</h1>
+          <ul
+            class="flex flex-wrap sm:flex-col overflow-hidden justify-between gap-4"
+          >
+            <li><button class="text-white" @click="view = 'view1'">SPButton</button></li>
+            <li><button class="text-white" @click="view = 'view2'">SPButtonExtra</button></li>
+          </ul>
+        </div>
+      </aside>
+      <main
+        role="main"
+        class="w-full h-full flex-grow p-4 overflow-auto border border-white"
+      >
+        <!-- content area -->
+        <div x-show="view === 'default'">
+          Select an option from the aside list.
+        </div>
+        <div x-show="view === 'view1'">
+          <h2 class="pb-4 font-bold">SPButton</h2>
+          <p>
+            This element is a very simple button component with which we can
+            just render a component with a default text. No interactivity, no dynamic.
+          </p>
+
+          <div
+            x-data="{ code: `<sp-button></sp-button>`, highlightCode($el) { Prism.highlightElement($el); } }"
+          >
+            <template x-for="item in [code]" :key="item">
+              <pre><code x-text="item" class="language-html" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+            </template>
+          </div>
+
+          <sp-button></sp-button>
+
+          <p>
+            In this element we can see that we can render TailwindCSS inside the
+            element. This is the whole component.
+          </p>
+
+          <div x-data="{ code: window.spButtonCode, highlightCode($el) { Prism.highlightElement($el); } }">
+            <template x-for="item in [code]" :key="item">
+              <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+            </template>
+          </div>
+        </div>
+        <div x-show="view === 'view2'">
+            <h2 class="pb-4 font-bold">SPButtonExtra</h2>
+            <p>
+                This element is a bit cooler than the <span class="underline" role="button" @click="view = 'view1'">previous one</span> in the sense that we can pass some attributes. For example, we can pass a text to the button or extra classes from TailwindCSS.
+            </p>
+            <sp-extra-button text="I have other cool classes" extra-classes="border-white bg-black mr-4"></sp-extra-button>
+            <sp-button></sp-button>
+
+            <p>Here you can see the code.</p>
+
+            <div
+                x-data="{ code: `<sp-extra-button text=\'I have other cool classes\' extra-classes=\'border-white bg-black mr-4\'></sp-extra-button>`, highlightCode($el) { Prism.highlightElement($el); } }"
+            >
+                <template x-for="item in [code]" :key="item">
+                <pre><code x-text="item" class="language-html" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+                </template>
+            </div>
+
+            <div x-data="{ code: window.spExtraButtonCode, highlightCode($el) { Prism.highlightElement($el); } }">
+                <template x-for="item in [code]" :key="item">
+                  <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+                </template>
+            </div>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <section class="py-8">
+        <div class="container flex flex-wrap items-center justify-center gap-6">
+          <p class="text-center">
+            © 2024 - Made with ❤️ by
+            <a
+              rel="nofollow noopener"
+              title="msweb"
+              target="_blank"
+              href="https://www.manuelsanchezweb.com"
+              >manuelsanchezweb</a
+            >.
+          </p>
+        </div>
+      </section>
+    </footer>
+
+    <script>
+        // Assuming spButtonCode is defined as a global variable or imported from a module
+        window.spButtonCode = `class SPButton extends HTMLElement {
+    constructor() {
+    super(); // Always call super first in constructor
+    this.innerHTML = \`<button class="bg-blue-500 my-4 text-white font-bold py-2 px-4 rounded">Click me</button>\`
+    }
+}
+
+customElements.define('sp-button', SPButton);`;
+
+        window.spExtraButtonCode = `class SPExtraButton extends HTMLElement {
+  constructor() {
+    super();
+    this.render();
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  render() {
+    const text = this.getAttribute('text') || 'Default Text';
+    const extraClasses = this.getAttribute('extra-classes') || '';
+
+    this.innerHTML = \`<button class="bg-blue-500 my-4 text-white font-bold py-2 px-4 rounded \${extraClasses}">\${text}</button>\`;
+  }
+}
+
+customElements.define('sp-extra-button', SPExtraButton);`;
+      </script>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
