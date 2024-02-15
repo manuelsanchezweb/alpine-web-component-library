@@ -1,3 +1,9 @@
+/**
+ * @name SPExtraButton
+ * @description
+ * This is a simple button component with extra classes.
+ * You can pass extra classes and a text to the button.
+ */
 class SPExtraButton extends HTMLElement {
   constructor() {
     super()
