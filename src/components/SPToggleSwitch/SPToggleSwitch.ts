@@ -13,3 +13,9 @@ class SPToggleSwitch extends HTMLElement {
 }
 
 export default SPToggleSwitch
+
+// <div x-data="{ toggle : false }"
+//     @click="toggle = ! toggle"
+//     class="relative cursor-pointer h-6 w-12 rounded-full transition-all duration-300 ease-in-out bg-cyan-400" :class=" toggle ? 'bg-cyan-400' : 'bg-slate-400' ">
+//     <span class="absolute h-6 w-6 rounded-full bg-white transition-all duration-300 ease-in-out" :class=" toggle ? 'translate-x-7' : '' "></span>
+// </div>

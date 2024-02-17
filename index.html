@@ -72,11 +72,12 @@
             x-show="isOpen()"
             class="fixed xl:static inset-0 flex bg-black/75"
           >
-            <div @click.away="handleAway()" class="w-80 pb-12 bg-white p-8 md:p-0">
+            <div
+              @click.away="handleAway()"
+              class="w-80 pb-12 bg-white p-8 md:p-0"
+            >
               <!-- Nav - Header -->
-              <div
-                class="flex justify-between w-full items-center mt-2 mb-4"
-              >
+              <div class="flex justify-between w-full items-center mt-2 mb-4">
                 <h1 class="text-md font-bold" x-text="$store.items.name">
                   Web Components Library
                 </h1>
@@ -103,37 +104,51 @@
               </div>
 
               <!-- Nav - Category without Reactivity -->
-              <div class="font-bold bg-blue-200 border border-black p-2 mb-4">Simple Web Components</div>
-              <ul
-                class="flex flex-col overflow-hidden justify-between gap-4"
-              >
+              <div class="font-bold bg-blue-200 border border-black p-2 mb-4">
+                Simple Web Components
+              </div>
+              <ul class="flex flex-col overflow-hidden justify-between gap-4">
                 <li>
-                  <button @click="view = 'view1'">⏺ SPButton (Test Element)</button>
+                  <button @click="view = 'view1'">
+                    ⏺ SPButton (Test Element)
+                  </button>
                 </li>
                 <li>
-                  <button @click="view = 'view2'">⏺ SPButtonExtra (Test Element)</button>
+                  <button @click="view = 'view2'">
+                    ⏺ SPButtonExtra (Test Element)
+                  </button>
                 </li>
                 <li>
                   <button @click="view = 'view3'">⏺ SPLink</button>
                 </li>
                 <li>
-                  <button @click="view = 'view4'">⏺ SPInput (Coming Soon)</button>
+                  <button @click="view = 'view4'">
+                    ⏺ SPInput (Coming Soon)
+                  </button>
                 </li>
                 <li>
-                  <button @click="view = 'view5'">⏺ SPFormGroup (Coming Soon)</button>
+                  <button @click="view = 'view5'">
+                    ⏺ SPFormGroup (Coming Soon)
+                  </button>
+                </li>
+                <li>
+                  <button @click="view = 'view6'">
+                    ⏺ SPModal (Coming Soon)
+                  </button>
                 </li>
               </ul>
 
               <div class="my-6"></div>
 
-              <div class="font-bold bg-blue-200 border border-black p-2 mb-4">Reactive Components</div>
-              <ul
-                class="flex flex-col overflow-hidden justify-between gap-4"
-              >
+              <div class="font-bold bg-blue-200 border border-black p-2 mb-4">
+                Reactive Components
+              </div>
+              <ul class="flex flex-col overflow-hidden justify-between gap-4">
                 <li>
-                  <button @click="view = 'view6'">⏺ ToggleSwitcher (Coming Soon)</button>
+                  <button @click="view = 'view7'">
+                    ⏺ ToggleSwitcher (Coming Soon)
+                  </button>
                 </li>
-               
               </ul>
             </div>
           </div>
@@ -244,57 +259,368 @@
         <div x-show="view === 'view3'">
           <h2 class="pb-4 font-bold">SPLink</h2>
           <p>
-            With this element we are able to choose between anchor and button with some params, and add also additional attributes and extra classes if we want.
+            With this element we are able to choose between anchor and button
+            with some params, and add also additional attributes and extra
+            classes if we want.
           </p>
 
-          <sp-link>
-              I am an anchor
-          </sp-link>
-          <sp-link href="https://www.google.com" target="_blank" title="Open Google on a new tab">
-              I am an anchor with href and title
+          <sp-link> I am an anchor </sp-link>
+          <sp-link
+            href="https://www.google.com"
+            target="_blank"
+            title="Open Google on a new tab"
+          >
+            I am an anchor with href and title
           </sp-link>
           <sp-link as="button" aria-label="Click me" onclick="alert('top')">
             <span>I am button</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-bell"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"
+              />
+              <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+            </svg>
           </sp-link>
 
           <p>The details of how to use this will come soon...</p>
-         
         </div>
         <div x-show="view === 'view4'">
           <h2 class="pb-4 font-bold">SPInput</h2>
-          <p>
-            With this element we are able create easily input fields.
-          </p>
+          <p>With this element we are able create easily input fields.</p>
 
-          <sp-input id="name" name="text" type="text" placeholder="Enter your name" extra-classes="my-4"></sp-input>
-          <sp-input id="email" name="email" type="email" placeholder="Enter your email" extra-classes="my-4"></sp-input>
+          <sp-input
+            id="name"
+            name="text"
+            type="text"
+            placeholder="Enter your name"
+            extra-classes="my-4"
+          ></sp-input>
+          <sp-input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            extra-classes="my-4"
+          ></sp-input>
 
           <p>The details of how to use this will come soon...</p>
-         
         </div>
         <div x-show="view === 'view5'">
           <h2 class="pb-4 font-bold">SPFormGroup</h2>
           <p>
-            With this element we are able create easily combinations of labels and inputs.
+            With this element we are able create easily combinations of labels
+            and inputs.
           </p>
 
           <p>The details of how to use this will come soon...</p>
-         
         </div>
         <div x-show="view === 'view6'">
-          <h2 class="pb-4 font-bold">SPToggleSwitch</h2>
+          <h2 class="pb-4 font-bold">SPModal</h2>
           <p>
-            Coming soon...
+            With this element we are able to create modal dialogs very easily.
           </p>
+
+          <div x-data="{ modelOpen: false }">
+            <button
+              @click="modelOpen =!modelOpen"
+              class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50 mb-6"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+
+              <span>Invite Member</span>
+            </button>
+
+            <div
+              x-show="modelOpen"
+              class="fixed inset-0 z-50 overflow-y-auto"
+              aria-labelledby="modal-title"
+              role="dialog"
+              aria-modal="true"
+            >
+              <div
+                class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0"
+              >
+                <div
+                  x-cloak
+                  @click="modelOpen = false"
+                  x-show="modelOpen"
+                  x-transition:enter="transition ease-out duration-300 transform"
+                  x-transition:enter-start="opacity-0"
+                  x-transition:enter-end="opacity-100"
+                  x-transition:leave="transition ease-in duration-200 transform"
+                  x-transition:leave-start="opacity-100"
+                  x-transition:leave-end="opacity-0"
+                  class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40"
+                  aria-hidden="true"
+                ></div>
+
+                <div
+                  x-cloak
+                  x-show="modelOpen"
+                  x-transition:enter="transition ease-out duration-300 transform"
+                  x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave="transition ease-in duration-200 transform"
+                  x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl"
+                >
+                  <div class="flex items-center justify-between space-x-4">
+                    <h1 class="text-xl font-medium text-gray-800">
+                      Invite team memebr
+                    </h1>
+
+                    <button
+                      @click="modelOpen = false"
+                      class="text-gray-600 focus:outline-none hover:text-gray-700"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <p class="mt-2 text-sm text-gray-500">
+                    Add your teammate to your team and start work to get things
+                    done
+                  </p>
+
+                  <form class="mt-5">
+                    <div>
+                      <label
+                        for="user name"
+                        class="block text-sm text-gray-700 capitalize dark:text-gray-200"
+                        >Teammate name</label
+                      >
+                      <input
+                        placeholder="Arthur Melo"
+                        type="text"
+                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"
+                      />
+                    </div>
+
+                    <div class="mt-4">
+                      <label
+                        for="email"
+                        class="block text-sm text-gray-700 capitalize dark:text-gray-200"
+                        >Teammate email</label
+                      >
+                      <input
+                        placeholder="arthurmelo@example.app"
+                        type="email"
+                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"
+                      />
+                    </div>
+
+                    <div class="mt-4">
+                      <h1 class="text-xs font-medium text-gray-400 uppercase">
+                        Permissions
+                      </h1>
+
+                      <div class="mt-4 space-y-5">
+                        <div
+                          class="flex items-center space-x-3 cursor-pointer"
+                          x-data="{ show: true }"
+                          @click="show =!show"
+                        >
+                          <div
+                            class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
+                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']"
+                          >
+                            <label
+                              for="show"
+                              @click="show =!show"
+                              class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
+                              :class="[show ? 'translate-x-full border-indigo-500' : 'translate-x-0 border-gray-300']"
+                            ></label>
+                            <input
+                              type="checkbox"
+                              name="show"
+                              class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none"
+                            />
+                          </div>
+
+                          <p class="text-gray-500">Can make task</p>
+                        </div>
+
+                        <div
+                          class="flex items-center space-x-3 cursor-pointer"
+                          x-data="{ show: false }"
+                          @click="show =!show"
+                        >
+                          <div
+                            class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
+                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']"
+                          >
+                            <label
+                              for="show"
+                              @click="show =!show"
+                              class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
+                              :class="[show ? 'translate-x-full border-indigo-500' : 'translate-x-0 border-gray-300']"
+                            ></label>
+                            <input
+                              type="checkbox"
+                              name="show"
+                              class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none"
+                            />
+                          </div>
+
+                          <p class="text-gray-500">Can delete task</p>
+                        </div>
+
+                        <div
+                          class="flex items-center space-x-3 cursor-pointer"
+                          x-data="{ show: true }"
+                          @click="show =!show"
+                        >
+                          <div
+                            class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
+                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']"
+                          >
+                            <label
+                              for="show"
+                              @click="show =!show"
+                              class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
+                              :class="[show ? 'translate-x-full border-indigo-500' : 'translate-x-0 border-gray-300']"
+                            ></label>
+                            <input
+                              type="checkbox"
+                              name="show"
+                              class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none"
+                            />
+                          </div>
+
+                          <p class="text-gray-500">Can edit task</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                      <button
+                        type="button"
+                        class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50"
+                      >
+                        Invite Member
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>The details of how to use this will come soon...</p>
+
+          <!-- Dropdown -->
+          <div class="flex justify-center">
+            <div x-data="{open : false}" class="flex flex-col px-2 py-20 md:px-52 space-y-1 text-slate-800">
+                <div class="mt-1 w-40">
+                    <button @click="open = true" class="flex items-center rounded bg-white shadow space-x-1 px-3 py-2">
+                        <span>Actions</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </div>
+                <!--Options-->
+                <div x-show="open === true" x-transition="" @click.outside="open = false" class="flex flex-col text-sm w-40 left-0 mt-2 bg-white rounded-sm shadow-md overflow-hidden" style="display: none;">
+                    <div>
+                        <a class="w-full block hover:bg-slate-200 p-2" href="#">Add Task</a>
+                        <a class="w-full block hover:bg-slate-200 p-2" href="#">View Tasks</a>
+                    </div>
+                    <div class="border-t border-slate-400">
+                        <a class="w-full block hover:bg-slate-200 p-2" href="#">Edit Task</a>
+                        <a class="w-full block hover:bg-slate-200 p-2" href="#">Delete Tasks</a>
+                    </div>
+                </div>
+                <!--Options-->
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div x-data="{selected : 'first'}" class="w-full">
+            <!--Buttons-->
+            <div @keydown.right="$focus.wrap().next()" @keydown.left="$focus.wrap().previous()" class="flex items-center space-x-5 bg-fuchsia-900 bg-opacity-50 text-white rounded-md">
+                <button @click="selected = 'first'" @focus="selected = 'first'" class="w-full rounded-lg py-2 text-sm leading-5 ring-white ring-opacity-50 ring-offset-2 ring-offset-fuchsia-400 focus:outline-none focus:ring-2 bg-white text-fuchsia-900" :class="selected === 'first' ? 'bg-white text-fuchsia-900' : ''">
+                    First
+                </button>
+                <button @click="selected = 'second'" @focus="selected = 'second'" class="w-full rounded-lg py-2 text-sm leading-5 ring-white ring-opacity-50 ring-offset-2 ring-offset-fuchsia-400 focus:outline-none focus:ring-2" :class="selected === 'second' ? 'bg-white text-fuchsia-900' : ''">
+                    Second
+                </button>
+                <button @click="selected = 'third'" @focus="selected = 'third'" class="w-full rounded-lg py-2 text-sm leading-5 ring-white ring-opacity-50 ring-offset-2 ring-offset-fuchsia-400 focus:outline-none focus:ring-2" :class="selected === 'third' ? 'bg-white text-fuchsia-900' : ''">
+                    Third
+                </button>
+            </div>
+            <!--Buttons-->
+            <!--Contents-->
+            <div x-show="selected === 'first'" class="mt-2 p-5 rounded-lg shadow-sm bg-white text-slate-900">
+                <h1>First Tab</h1>
+                <p class="text-sm text-slate-600">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                    Sunt asperiores saepe eos ullam magni</p>
+            </div>
+            <div x-show="selected === 'second'" class="mt-2 p-5 rounded-lg shadow-sm bg-white text-slate-900" style="display: none;">
+                <h1>Second Tab</h1>
+                <p class="text-sm text-slate-600">Tempore ratione 
+                    aspernatur fugiat ex debitis provident voluptas id, 
+                    obcaecati repellat rem sapiente fugit animi ad.</p>
+            </div>
+            <div x-show="selected === 'third'" class="mt-2 p-5 rounded-lg shadow-sm bg-white text-slate-900" style="display: none;">
+                <h1>Third Tab</h1>
+                <p class="text-sm text-slate-600">Dolor sit amet consectetur, adipisicing elit. 
+                    Sunt asperiores saepe eos ullam magni, voluptas id, 
+                    obcaecati repellat rem sapiente fugit animi ad.</p>
+            </div>
+            <!--Contents-->
+        </div>
+        </div>
+        <div x-show="view === 'view7'">
+          <h2 class="pb-4 font-bold">SPToggleSwitch</h2>
+          <p>Coming soon...</p>
           <sp-toggle-switch extra-classes="mt-4"></sp-toggle-switch>
 
-          <p>We can access from inside the web component the global state of the Alpine Store Config.</p>
-          <p>For example, the current value of the toggle switch is: <span class="font-bold" x-text="$store.config.toggleOn"></span></p>
+          <p>
+            We can access from inside the web component the global state of the
+            Alpine Store Config.
+          </p>
+          <p>
+            For example, the current value of the toggle switch is:
+            <span class="font-bold" x-text="$store.config.toggleOn"></span>
+          </p>
         </div>
       </main>
     </div>
-
 
     <!-- Footer -->
     <footer class="mt-auto">
