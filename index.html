@@ -63,7 +63,7 @@
 
     <!-- Two Columns: Aside and Main -->
     <div
-      x-data="{ view: 'view1' }"
+      x-data="{ view: 'view3' }"
       class="w-full flex flex-col sm:flex-row flex-grow overflow-hidden py-8 gap-4"
     >
       <aside x-data="sidebar()" @resize.window="handleResize()">
@@ -72,7 +72,7 @@
             x-show="isOpen()"
             class="fixed xl:static inset-0 flex bg-black/75"
           >
-            <div @click.away="handleAway()" class="w-80 pb-12 bg-white p-8">
+            <div @click.away="handleAway()" class="w-80 pb-12 bg-white p-8 md:p-0">
               <!-- Nav - Header -->
               <div
                 class="flex justify-between w-full items-center mt-2 mb-4"
@@ -108,10 +108,19 @@
                 class="flex flex-col overflow-hidden justify-between gap-4"
               >
                 <li>
-                  <button @click="view = 'view1'">⏺ SPButton</button>
+                  <button @click="view = 'view1'">⏺ SPButton (Test Element)</button>
                 </li>
                 <li>
-                  <button @click="view = 'view2'">⏺ SPButtonExtra</button>
+                  <button @click="view = 'view2'">⏺ SPButtonExtra (Test Element)</button>
+                </li>
+                <li>
+                  <button @click="view = 'view3'">⏺ SPLink</button>
+                </li>
+                <li>
+                  <button @click="view = 'view4'">⏺ SPInput (Coming Soon)</button>
+                </li>
+                <li>
+                  <button @click="view = 'view5'">⏺ SPFormGroup (Coming Soon)</button>
                 </li>
               </ul>
 
@@ -122,11 +131,9 @@
                 class="flex flex-col overflow-hidden justify-between gap-4"
               >
                 <li>
-                  <button @click="view = 'view1'">⏺ SPButton</button>
+                  <button @click="view = 'view6'">⏺ ToggleSwitcher (Coming Soon)</button>
                 </li>
-                <li>
-                  <button @click="view = 'view2'">⏺ SPButtonExtra</button>
-                </li>
+               
               </ul>
             </div>
           </div>
@@ -234,10 +241,60 @@
             </template>
           </div>
         </div>
+        <div x-show="view === 'view3'">
+          <h2 class="pb-4 font-bold">SPLink</h2>
+          <p>
+            With this element we are able to choose between anchor and button with some params, and add also additional attributes and extra classes if we want.
+          </p>
+
+          <sp-link>
+              I am an anchor
+          </sp-link>
+          <sp-link href="https://www.google.com" target="_blank" title="Open Google on a new tab">
+              I am an anchor with href and title
+          </sp-link>
+          <sp-link as="button" aria-label="Click me" onclick="alert('top')">
+            <span>I am button</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+          </sp-link>
+
+          <p>The details of how to use this will come soon...</p>
+         
+        </div>
+        <div x-show="view === 'view4'">
+          <h2 class="pb-4 font-bold">SPInput</h2>
+          <p>
+            With this element we are able create easily input fields.
+          </p>
+
+          <sp-input id="name" name="text" type="text" placeholder="Enter your name" extra-classes="my-4"></sp-input>
+          <sp-input id="email" name="email" type="email" placeholder="Enter your email" extra-classes="my-4"></sp-input>
+
+          <p>The details of how to use this will come soon...</p>
+         
+        </div>
+        <div x-show="view === 'view5'">
+          <h2 class="pb-4 font-bold">SPFormGroup</h2>
+          <p>
+            With this element we are able create easily combinations of labels and inputs.
+          </p>
+
+          <p>The details of how to use this will come soon...</p>
+         
+        </div>
+        <div x-show="view === 'view6'">
+          <h2 class="pb-4 font-bold">SPToggleSwitch</h2>
+          <p>
+            Coming soon...
+          </p>
+          <sp-toggle-switch extra-classes="mt-4"></sp-toggle-switch>
+
+          <p>We can access from inside the web component the global state of the Alpine Store Config.</p>
+          <p>For example, the current value of the toggle switch is: <span class="font-bold" x-text="$store.config.toggleOn"></span></p>
+        </div>
       </main>
     </div>
 
-    <sp-button></sp-button>
 
     <!-- Footer -->
     <footer class="mt-auto">

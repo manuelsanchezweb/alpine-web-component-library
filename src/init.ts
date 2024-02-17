@@ -1,9 +1,18 @@
 import Alpine from 'alpinejs'
-import { SPButton, SPExtraButton } from './components'
+import {
+  SPButton,
+  SPExtraButton,
+  SPInput,
+  SPLink,
+  SPToggleSwitch,
+} from './components'
 
 export function initSPWebComponents() {
   window.customElements.define('sp-button', SPButton)
   window.customElements.define('sp-extra-button', SPExtraButton)
+  window.customElements.define('sp-link', SPLink)
+  window.customElements.define('sp-toggle-switch', SPToggleSwitch)
+  window.customElements.define('sp-input', SPInput)
 }
 
 export function initPrismJSCodeHighlighting() {
@@ -42,6 +51,10 @@ export function initAlpine() {
   Alpine.store('items', {
     name: 'Web Components with Alpine.js',
     products: ['SPButton', 'SPButtonExtra'],
+  })
+
+  Alpine.store('config', {
+    toggleOn: false,
   })
 
   window.Alpine = Alpine

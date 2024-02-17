@@ -37,3 +37,8 @@ h2,
 p {
   margin-bottom: 1.5em;
 }
+
+sp-link button,
+sp-link a {
+  @apply border border-black flex gap-2 w-fit py-2 px-4 rounded-full my-4 bg-gray-200 text-black hover:bg-gray-400 hover:text-black focus:text-black focus:bg-gray-400;
+}

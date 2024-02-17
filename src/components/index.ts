@@ -1,2 +1,5 @@
 export { default as SPButton } from './SPButton/SPButton'
 export { default as SPExtraButton } from './SPExtraButton/SPExtraButton'
+export { default as SPLink } from './SPLink/SPLink'
+export { default as SPToggleSwitch } from './SPToggleSwitch/SPToggleSwitch'
+export { default as SPInput } from './SPInput/SPInput'
