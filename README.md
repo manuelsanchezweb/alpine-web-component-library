@@ -20,6 +20,7 @@ Done for educational purposes. Deploy [here](https://alpine-web-component-librar
 - 🛠️ Web Component Library in Process (No Lit)
 - 🎨 Clean, Modern UI Using TailwindCSS'
 - 🔤 100% written in TypeScript
+- 🧪 Test with vitest
 - 🎁 ...much more
 
 ## Getting started
