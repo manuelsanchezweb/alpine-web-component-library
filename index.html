@@ -4,25 +4,163 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Web Component Library</title>
   </head>
   <body class="text-black font-inter flex flex-col px-4">
+    <!-- Background -->
+    <div
+      class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f5f5f5,transparent_1px),linear-gradient(to_bottom,#f5f5f5,transparent_1px)] bg-[size:6rem_4rem]"
+    >
+      <div
+        class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#fffdd0,transparent)]"
+      ></div>
+    </div>
+
+    <!-- GitHub Thing -->
+    <div
+      class="absolute left-0 right-0 md:top-4 md:mr-4 md:justify-end mx-auto w-full flex justify-center"
+    >
+      <a
+        class="flex hover:scale-105 group transition"
+        href="https://github.com/manuelsanchezweb/alpine-web-component-library"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div
+          class="flex h-8 w-8 items-center justify-center space-x-2 rounded-md border"
+        >
+          <svg fill="currentColor" viewBox="0 0 24 24" class="h-5 w-5">
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+            ></path>
+          </svg>
+        </div>
+        <div class="flex items-center">
+          <div
+            class="h-4 w-4 border-y-8 border-l-0 border-r-8 border-solid border-gray-100 border-y-transparent group-hover:border-x-yellow-200"
+          ></div>
+          <div
+            class="overflow-hidden flex flex-col h-8 items-center rounded-md bg-gray-100 px-4 font-medium text-xs justify-center group-hover:bg-yellow-200 transition w-36 relative"
+          >
+            <span
+              class="absolute group-hover:animate-fade-out-up"
+              x-data="{ stars: 0 }"
+              x-init="fetch('https://api.github.com/repos/manuelsanchezweb/alpine-web-component-library')
+          .then(response => response.json())
+          .then(data => stars = data.stargazers_count)"
+            >
+              <span x-text="`${stars} estrellas en GitHub`"></span>
+            </span>
+            <span
+              class="absolute opacity-0 -translate-y-5 group-hover:animate-fade-in-up"
+              >¡Dale una estrella!</span
+            >
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Two Columns: Aside and Main -->
     <div
       x-data="{ view: 'view1' }"
       class="w-full flex flex-col sm:flex-row flex-grow overflow-hidden py-8 gap-4"
     >
-      <aside class="sm:w-1/3 md:1/4 w-full flex-shrink flex-grow-0">
-        <div class="sticky top-0 w-full flex flex-col gap-4">
-          <h1 class="text-sm" x-text="$store.items.name">Web Components Library</h1>
-          <ul
-            class="flex flex-wrap sm:flex-col overflow-hidden justify-between gap-4"
+      <aside x-data="sidebar()" @resize.window="handleResize()">
+        <div class="xl:flex">
+          <div
+            x-show="isOpen()"
+            class="fixed xl:static inset-0 flex bg-black/75"
           >
-            <li><button class="text-white" @click="view = 'view1'">SPButton</button></li>
-            <li><button class="text-white" @click="view = 'view2'">SPButtonExtra</button></li>
-          </ul>
+            <div @click.away="handleAway()" class="w-80 pb-12 bg-white p-8">
+              <!-- Nav - Header -->
+              <div
+                class="flex justify-between w-full items-center mt-2 mb-4"
+              >
+                <h1 class="text-md font-bold" x-text="$store.items.name">
+                  Web Components Library
+                </h1>
+
+                <button
+                  @click.prevent="handleClose()"
+                  class="p-3 flex items-center"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Nav - Category without Reactivity -->
+              <div class="font-bold bg-blue-200 border border-black p-2 mb-4">Simple Web Components</div>
+              <ul
+                class="flex flex-col overflow-hidden justify-between gap-4"
+              >
+                <li>
+                  <button @click="view = 'view1'">⏺ SPButton</button>
+                </li>
+                <li>
+                  <button @click="view = 'view2'">⏺ SPButtonExtra</button>
+                </li>
+              </ul>
+
+              <div class="my-6"></div>
+
+              <div class="font-bold bg-blue-200 border border-black p-2 mb-4">Reactive Components</div>
+              <ul
+                class="flex flex-col overflow-hidden justify-between gap-4"
+              >
+                <li>
+                  <button @click="view = 'view1'">⏺ SPButton</button>
+                </li>
+                <li>
+                  <button @click="view = 'view2'">⏺ SPButtonExtra</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <nav class="flex">
+              <div x-show="!isOpen()" class="flex">
+                <button
+                  aria-label="Open sidebar"
+                  x-show="!isOpen()"
+                  @click.prevent="handleOpen()"
+                  class="p-3 hover:bg-blue-300"
+                  href="#"
+                >
+                  <svg
+                    class="h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </nav>
+          </div>
         </div>
       </aside>
+
       <main
         role="main"
         class="w-full h-full flex-grow p-4 overflow-auto border border-white"
@@ -35,7 +173,8 @@
           <h2 class="pb-4 font-bold">SPButton</h2>
           <p>
             This element is a very simple button component with which we can
-            just render a component with a default text. No interactivity, no dynamic.
+            just render a component with a default text. No interactivity, no
+            dynamic.
           </p>
 
           <div
@@ -53,41 +192,57 @@
             element. This is the whole component.
           </p>
 
-          <div x-data="{ code: window.spButtonCode, highlightCode($el) { Prism.highlightElement($el); } }">
+          <div
+            x-data="{ code: window.spButtonCode, highlightCode($el) { Prism.highlightElement($el); } }"
+          >
             <template x-for="item in [code]" :key="item">
               <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
             </template>
           </div>
         </div>
         <div x-show="view === 'view2'">
-            <h2 class="pb-4 font-bold">SPButtonExtra</h2>
-            <p>
-                This element is a bit cooler than the <span class="underline" role="button" @click="view = 'view1'">previous one</span> in the sense that we can pass some attributes. For example, we can pass a text to the button or extra classes from TailwindCSS.
-            </p>
-            <sp-extra-button text="I have other cool classes" extra-classes="border-white bg-black mr-4"></sp-extra-button>
-            <sp-button></sp-button>
-
-            <p>Here you can see the code.</p>
-
-            <div
-                x-data="{ code: `<sp-extra-button text=\'I have other cool classes\' extra-classes=\'border-white bg-black mr-4\'></sp-extra-button>`, highlightCode($el) { Prism.highlightElement($el); } }"
+          <h2 class="pb-4 font-bold">SPButtonExtra</h2>
+          <p>
+            This element is a bit cooler than the
+            <span class="underline" role="button" @click="view = 'view1'"
+              >previous one</span
             >
-                <template x-for="item in [code]" :key="item">
-                <pre><code x-text="item" class="language-html" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
-                </template>
-            </div>
+            in the sense that we can pass some attributes. For example, we can
+            pass a text to the button or extra classes from TailwindCSS.
+          </p>
+          <sp-extra-button
+            text="I have other cool classes"
+            extra-classes="border-white bg-black mr-4"
+          ></sp-extra-button>
+          <sp-button></sp-button>
 
-            <div x-data="{ code: window.spExtraButtonCode, highlightCode($el) { Prism.highlightElement($el); } }">
-                <template x-for="item in [code]" :key="item">
-                  <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
-                </template>
-            </div>
+          <p>Here you can see the code.</p>
+
+          <div
+            x-data="{ code: `<sp-extra-button text=\'I have other cool classes\' extra-classes=\'border-white bg-black mr-4\'></sp-extra-button>`, highlightCode($el) { Prism.highlightElement($el); } }"
+          >
+            <template x-for="item in [code]" :key="item">
+              <pre><code x-text="item" class="language-html" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+            </template>
+          </div>
+
+          <div
+            x-data="{ code: window.spExtraButtonCode, highlightCode($el) { Prism.highlightElement($el); } }"
+          >
+            <template x-for="item in [code]" :key="item">
+              <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+            </template>
+          </div>
         </div>
       </main>
     </div>
-    <footer>
+
+    <sp-button></sp-button>
+
+    <!-- Footer -->
+    <footer class="mt-auto">
       <section class="py-8">
-        <div class="container flex flex-wrap items-center justify-center gap-6">
+        <div class="flex flex-wrap items-center justify-center gap-6">
           <p class="text-center">
             © 2024 - Made with ❤️ by
             <a
@@ -103,36 +258,46 @@
     </footer>
 
     <script>
-        // Assuming spButtonCode is defined as a global variable or imported from a module
-        window.spButtonCode = `class SPButton extends HTMLElement {
-    constructor() {
-    super(); // Always call super first in constructor
-    this.innerHTML = \`<button class="bg-blue-500 my-4 text-white font-bold py-2 px-4 rounded">Click me</button>\`
-    }
-}
+      function sidebar() {
+        const breakpoint = 1280
+        return {
+          open: {
+            above: true,
+            below: false,
+          },
+          isAboveBreakpoint: window.innerWidth > breakpoint,
 
-customElements.define('sp-button', SPButton);`;
+          handleResize() {
+            this.isAboveBreakpoint = window.innerWidth > breakpoint
+          },
 
-        window.spExtraButtonCode = `class SPExtraButton extends HTMLElement {
-  constructor() {
-    super();
-    this.render();
-  }
-
-  connectedCallback() {
-    this.render();
-  }
-
-  render() {
-    const text = this.getAttribute('text') || 'Default Text';
-    const extraClasses = this.getAttribute('extra-classes') || '';
-
-    this.innerHTML = \`<button class="bg-blue-500 my-4 text-white font-bold py-2 px-4 rounded \${extraClasses}">\${text}</button>\`;
-  }
-}
-
-customElements.define('sp-extra-button', SPExtraButton);`;
-      </script>
+          isOpen() {
+            console.log(this.isAboveBreakpoint)
+            if (this.isAboveBreakpoint) {
+              return this.open.above
+            }
+            return this.open.below
+          },
+          handleOpen() {
+            if (this.isAboveBreakpoint) {
+              this.open.above = true
+            }
+            this.open.below = true
+          },
+          handleClose() {
+            if (this.isAboveBreakpoint) {
+              this.open.above = false
+            }
+            this.open.below = false
+          },
+          handleAway() {
+            if (!this.isAboveBreakpoint) {
+              this.open.below = false
+            }
+          },
+        }
+      }
+    </script>
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

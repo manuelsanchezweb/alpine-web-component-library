@@ -7,6 +7,8 @@
 
 Done for educational purposes. Deploy [here](https://alpine-web-component-library.vercel.app/)
 
+Test Coverage: <!--coverage-->N/A<!--/coverage-->
+
 </div>
 
 ## Features
