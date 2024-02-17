@@ -30,9 +30,9 @@ jobs:
         with:
           name: coverage-report
           path: coverage/
-      - name: Calculate Coverage Percentage
-        id: coverage
-        run: echo "::set-output name=percentage::$(scripts/updateReadmeCoverage.js)"
+
+      - name: Update README with Coverage Percentage
+        run: node scripts/updateReadmeCoverage.js
 
       - name: Commit and Push Updated README
         run: |
