@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -29,4 +29,16 @@ const coveragePercentage =
     ? ((coveredStatements / totalStatements) * 100).toFixed(2)
     : '0.00'
 
-console.log(`Coverage: ${coveragePercentage}%`)
+const encodedCoveragePercentage = `${coveragePercentage}%25` // URL encode the "%" symbol as "%25"
+
+console.log(`Coverage: ${encodedCoveragePercentage}%`)
+
+const readmePath = join(__dirname, '..', 'README.md') // Adjust as necessary
+
+let readmeContent = readFileSync(readmePath, 'utf8')
+readmeContent = readmeContent.replace(
+  /<img src="https:\/\/img\.shields\.io\/badge\/[^-]*-test_coverage%20-green"/,
+  `<img src="https://img.shields.io/badge/${encodedCoveragePercentage}-test_coverage%20-green"`
+)
+
+writeFileSync('README.md', readmeContent)

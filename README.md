@@ -7,7 +7,11 @@
 
 Done for educational purposes. Deploy [here](https://alpine-web-component-library.vercel.app/)
 
-Test Coverage: <!--coverage-->N/A<!--/coverage-->
+<!--coverage-->
+
+<img src="https://img.shields.io/badge/0%25-test_coverage%20-green" alt="Ofertas de trabajo">
+
+<!--/coverage-->
 
 </div>
 
