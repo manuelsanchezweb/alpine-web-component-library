@@ -6,6 +6,7 @@ declare global {
   var Alpine: AlpineType
   var spButtonCode: string
   var spExtraButtonCode: string
+  var spHeadlineCode: string
   var sidebar: () => {
     open: { above: boolean; below: boolean }
     isAboveBreakpoint: boolean

@@ -19,7 +19,7 @@
 
     <!-- GitHub Thing -->
     <div
-      class="absolute top-[10px] left-0 right-0 md:top-4 md:mr-4 md:justify-end mx-auto w-full flex justify-center"
+      class="absolute top-[10px] left-0 right-0 md:top-2 md:mr-4 md:justify-end mx-auto w-full flex justify-center"
     >
       <a
         class="flex hover:scale-105 group transition"
@@ -63,7 +63,7 @@
 
     <!-- Two Columns: Aside and Main -->
     <div
-      x-data="{ view: 'view1' }"
+      x-data="{ view: 'default' }"
       class="w-full flex flex-col sm:flex-row flex-grow overflow-hidden py-8 gap-4"
     >
       <aside x-data="sidebar()" @resize.window="handleResize()">
@@ -74,12 +74,12 @@
           >
             <div
               @click.away="handleAway()"
-              class="w-80 pb-12 bg-white p-8 md:p-0"
+              class="w-80 pb-12 bg-white p-8 xl:p-0"
             >
               <!-- Nav - Header -->
               <div class="flex justify-between w-full items-center mt-2 mb-4">
-                <h1 class="text-md font-bold" x-text="$store.items.name">
-                  Web Components Library
+                <h1 class="text-md font-bold" >
+                  <button @click="view = 'default'" x-text="$store.items.name"> Web Components Library</button>
                 </h1>
 
                 <button
@@ -109,30 +109,33 @@
               </div>
               <ul class="flex flex-col overflow-hidden justify-between gap-4">
                 <li>
-                  <button @click="view = 'view1'">
+                  <button :class="{'font-bold': view === 'view1'}" @click="view = 'view1'">
                     ⏺ SPButton (Test Element)
                   </button>
                 </li>
                 <li>
-                  <button @click="view = 'view2'">
+                  <button :class="{'font-bold': view === 'view2'}" @click="view = 'view2'">
                     ⏺ SPButtonExtra (Test Element)
                   </button>
                 </li>
                 <li>
-                  <button @click="view = 'view3'">⏺ SPLink</button>
+                  <button :class="{'font-bold': view === 'view3'}" @click="view = 'view3'">⏺ SPLink (Coming Soon)</button>
                 </li>
                 <li>
-                  <button @click="view = 'view4'">
+                  <button :class="{'font-bold': view === 'view35'}" @click="view = 'view35'">⏺ SPHeadline (with ShadowDom)</button>
+                </li>
+                <li>
+                  <button :class="{'font-bold': view === 'view4'}" @click="view = 'view4'">
                     ⏺ SPInput (Coming Soon)
                   </button>
                 </li>
                 <li>
-                  <button @click="view = 'view5'">
+                  <button :class="{'font-bold': view === 'view5'}" @click="view = 'view5'">
                     ⏺ SPFormGroup (Coming Soon)
                   </button>
                 </li>
                 <li>
-                  <button @click="view = 'view6'">
+                  <button :class="{'font-bold': view === 'view6'}" @click="view = 'view6'">
                     ⏺ SPModal (Coming Soon)
                   </button>
                 </li>
@@ -145,7 +148,7 @@
               </div>
               <ul class="flex flex-col overflow-hidden justify-between gap-4">
                 <li>
-                  <button @click="view = 'view7'">
+                  <button :class="{'font-bold': view === 'view7'}" @click="view = 'view7'">
                     ⏺ ToggleSwitcher (Coming Soon)
                   </button>
                 </li>
@@ -189,10 +192,17 @@
       >
         <!-- content area -->
         <div x-show="view === 'default'">
-          Select an option from the aside list.
+          <sp-headline as="h2" extraClasses="bg-gray-200">Welcome to the library of Web Components using Alpine.js</sp-headline>
+
+          <p>You will find a lot of components on this page. Some of them are just experiments I am conducting in order to learn how to use properly Web Components and Shadow Dom, Alpine.js and TailwindCSS together. </p>
+
+          <p>Since it was a bit hard to handle using Shadow Dom with TailwindCSS, it was nice to find <a target="_blank" href="https://twind.style/">the twind library</a>, that gets that abstraction level difficulty from you.</p>
+
+
         </div>
         <div x-show="view === 'view1'">
-          <h2 class="pb-4 font-bold">SPButton</h2>
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPButton</sp-headline>
+
           <p>
             This element is a very simple button component with which we can
             just render a component with a default text. No interactivity, no
@@ -223,7 +233,7 @@
           </div>
         </div>
         <div x-show="view === 'view2'">
-          <h2 class="pb-4 font-bold">SPButtonExtra</h2>
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPButtonExtra</sp-headline>
           <p>
             This element is a bit cooler than the
             <span class="underline" role="button" @click="view = 'view1'"
@@ -257,7 +267,8 @@
           </div>
         </div>
         <div x-show="view === 'view3'">
-          <h2 class="pb-4 font-bold">SPLink</h2>
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPLink</sp-headline>
+
           <p>
             With this element we are able to choose between anchor and button
             with some params, and add also additional attributes and extra
@@ -296,8 +307,32 @@
 
           <p>The details of how to use this will come soon...</p>
         </div>
+        <div x-show="view === 'view35'">
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPHeadline</sp-headline>
+          <p>
+            This is the element you see here in the title. It is a simple headline in which we have some basic styles and a shadow dom. We can pass the tag we want to use, and the classes we want to add. And the content inside the slot.
+          </p>
+
+          <sp-headline as="h1" extraClasses="w-fit p-0">This is H1</sp-headline>
+          <sp-headline as="h2" extraClasses="w-fit p-0">This is H2</sp-headline>
+          <sp-headline as="h3" extraClasses="w-fit p-0">This is H3</sp-headline>
+          <sp-headline as="h4" extraClasses="w-fit p-0">This is H4</sp-headline>
+          <sp-headline as="h5" extraClasses="w-fit p-0">This is H5</sp-headline>
+          <sp-headline as="h6" extraClasses="w-fit p-0">This is H6</sp-headline>
+
+
+          <div
+          x-data="{ code: window.spHeadlineCode, highlightCode($el) { Prism.highlightElement($el); } }"
+        >
+          <template x-for="item in [code]" :key="item">
+            <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+          </template>
+        </div>
+
+          
+        </div>
         <div x-show="view === 'view4'">
-          <h2 class="pb-4 font-bold">SPInput</h2>
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPInput</sp-headline>
           <p>With this element we are able create easily input fields.</p>
 
           <sp-input
@@ -318,7 +353,7 @@
           <p>The details of how to use this will come soon...</p>
         </div>
         <div x-show="view === 'view5'">
-          <h2 class="pb-4 font-bold">SPFormGroup</h2>
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPFormGroup</sp-headline>
           <p>
             With this element we are able create easily combinations of labels
             and inputs.
@@ -327,7 +362,7 @@
           <p>The details of how to use this will come soon...</p>
         </div>
         <div x-show="view === 'view6'">
-          <h2 class="pb-4 font-bold">SPModal</h2>
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPModal</sp-headline>
           <p>
             With this element we are able to create modal dialogs very easily.
           </p>
@@ -606,7 +641,8 @@
         </div>
         </div>
         <div x-show="view === 'view7'">
-          <h2 class="pb-4 font-bold">SPToggleSwitch</h2>
+          <sp-headline as="h2" extraClasses="bg-gray-200">SPToggleSwitch</sp-headline>
+
           <p>Coming soon...</p>
           <sp-toggle-switch extra-classes="mt-4"></sp-toggle-switch>
 
@@ -655,7 +691,6 @@
           },
 
           isOpen() {
-            console.log(this.isAboveBreakpoint)
             if (this.isAboveBreakpoint) {
               return this.open.above
             }
