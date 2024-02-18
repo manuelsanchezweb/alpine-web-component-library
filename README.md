@@ -9,7 +9,7 @@ Done for educational purposes. Deploy [here](https://alpine-web-component-librar
 
 <!--coverage-->
 
-<img src="https://img.shields.io/badge/48.88%25-test_coverage%20-green" alt="Ofertas de trabajo">
+<img src="https://img.shields.io/badge/37.87%25-test_coverage%20-green" alt="Ofertas de trabajo">
 
 <!--/coverage-->
 
