@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [],
+  resolve: {
+    alias: {
+      '@config': '/config',
+      '@components': '/src/components',
+    },
+  },
   test: {
     globals: true,
     environment: 'happy-dom',
