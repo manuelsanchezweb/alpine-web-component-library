@@ -7,6 +7,13 @@ declare global {
   var spButtonCode: string
   var spExtraButtonCode: string
   var spHeadlineCode: string
+  var spHeadlineCodeExample: string
+  var spLinkCode: string
+  var spToggleSwitchCode: string
+  var spToggleSwitchCodeExample: string
+  var spLinkCodeExample: string
+  var spInputCode: string
+  var spInputCodeExample: string
   var sidebar: () => {
     open: { above: boolean; below: boolean }
     isAboveBreakpoint: boolean

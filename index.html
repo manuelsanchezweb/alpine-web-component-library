@@ -119,16 +119,17 @@
                   </button>
                 </li>
                 <li>
-                  <button :class="{'font-bold': view === 'view3'}" @click="view = 'view3'">⏺ SPLink (Coming Soon)</button>
+                  <button :class="{'font-bold': view === 'view3'}" @click="view = 'view3'">⏺ SPLink </button>
                 </li>
                 <li>
                   <button :class="{'font-bold': view === 'view35'}" @click="view = 'view35'">⏺ SPHeadline (with ShadowDom)</button>
                 </li>
                 <li>
                   <button :class="{'font-bold': view === 'view4'}" @click="view = 'view4'">
-                    ⏺ SPInput (Coming Soon)
+                    ⏺ SPInput
                   </button>
                 </li>
+                <!-- 
                 <li>
                   <button :class="{'font-bold': view === 'view5'}" @click="view = 'view5'">
                     ⏺ SPFormGroup (Coming Soon)
@@ -139,6 +140,7 @@
                     ⏺ SPModal (Coming Soon)
                   </button>
                 </li>
+                -->
               </ul>
 
               <div class="my-6"></div>
@@ -149,7 +151,7 @@
               <ul class="flex flex-col overflow-hidden justify-between gap-4">
                 <li>
                   <button :class="{'font-bold': view === 'view7'}" @click="view = 'view7'">
-                    ⏺ ToggleSwitcher (Coming Soon)
+                    ⏺ ToggleSwitcher
                   </button>
                 </li>
               </ul>
@@ -275,7 +277,7 @@
             classes if we want.
           </p>
 
-          <sp-link> I am an anchor </sp-link>
+          <sp-link href="https://www.google.com"> I am an anchor </sp-link>
           <sp-link
             href="https://www.google.com"
             target="_blank"
@@ -305,6 +307,14 @@
             </svg>
           </sp-link>
 
+          <div
+            x-data="{ code: window.spLinkCodeExample, highlightCode($el) { Prism.highlightElement($el); } }"
+          >
+            <template x-for="item in [code]" :key="item">
+              <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+            </template>
+          </div>
+
           <p>The details of how to use this will come soon...</p>
         </div>
         <div x-show="view === 'view35'">
@@ -320,6 +330,13 @@
           <sp-headline as="h5" extraClasses="w-fit p-0">This is H5</sp-headline>
           <sp-headline as="h6" extraClasses="w-fit p-0">This is H6</sp-headline>
 
+          <div
+          x-data="{ code: window.spHeadlineCodeExample, highlightCode($el) { Prism.highlightElement($el); } }"
+        >
+          <template x-for="item in [code]" :key="item">
+            <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+          </template>
+        </div>
 
           <div
           x-data="{ code: window.spHeadlineCode, highlightCode($el) { Prism.highlightElement($el); } }"
@@ -350,8 +367,16 @@
             extra-classes="my-4"
           ></sp-input>
 
-          <p>The details of how to use this will come soon...</p>
+          <div
+          x-data="{ code: window.spInputCodeExample, highlightCode($el) { Prism.highlightElement($el); } }"
+        >
+          <template x-for="item in [code]" :key="item">
+            <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+          </template>
         </div>
+
+        </div>
+        <!--
         <div x-show="view === 'view5'">
           <sp-headline as="h2" extraClasses="bg-gray-200">SPFormGroup</sp-headline>
           <p>
@@ -580,7 +605,7 @@
 
           <p>The details of how to use this will come soon...</p>
 
-          <!-- Dropdown -->
+
           <div class="flex justify-center">
             <div x-data="{open : false}" class="flex flex-col px-2 py-20 md:px-52 space-y-1 text-slate-800">
                 <div class="mt-1 w-40">
@@ -589,7 +614,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                 </div>
-                <!--Options-->
+             
                 <div x-show="open === true" x-transition="" @click.outside="open = false" class="flex flex-col text-sm w-40 left-0 mt-2 bg-white rounded-sm shadow-md overflow-hidden" style="display: none;">
                     <div>
                         <a class="w-full block hover:bg-slate-200 p-2" href="#">Add Task</a>
@@ -600,13 +625,13 @@
                         <a class="w-full block hover:bg-slate-200 p-2" href="#">Delete Tasks</a>
                     </div>
                 </div>
-                <!--Options-->
+      
             </div>
           </div>
 
-          <!-- Tabs -->
+
           <div x-data="{selected : 'first'}" class="w-full">
-            <!--Buttons-->
+      
             <div @keydown.right="$focus.wrap().next()" @keydown.left="$focus.wrap().previous()" class="flex items-center space-x-5 bg-fuchsia-900 bg-opacity-50 text-white rounded-md">
                 <button @click="selected = 'first'" @focus="selected = 'first'" class="w-full rounded-lg py-2 text-sm leading-5 ring-white ring-opacity-50 ring-offset-2 ring-offset-fuchsia-400 focus:outline-none focus:ring-2 bg-white text-fuchsia-900" :class="selected === 'first' ? 'bg-white text-fuchsia-900' : ''">
                     First
@@ -618,8 +643,7 @@
                     Third
                 </button>
             </div>
-            <!--Buttons-->
-            <!--Contents-->
+         
             <div x-show="selected === 'first'" class="mt-2 p-5 rounded-lg shadow-sm bg-white text-slate-900">
                 <h1>First Tab</h1>
                 <p class="text-sm text-slate-600">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
@@ -637,19 +661,29 @@
                     Sunt asperiores saepe eos ullam magni, voluptas id, 
                     obcaecati repellat rem sapiente fugit animi ad.</p>
             </div>
-            <!--Contents-->
+       
         </div>
         </div>
+      -->
+
         <div x-show="view === 'view7'">
           <sp-headline as="h2" extraClasses="bg-gray-200">SPToggleSwitch</sp-headline>
 
-          <p>Coming soon...</p>
           <sp-toggle-switch extra-classes="mt-4"></sp-toggle-switch>
 
           <p>
             We can access from inside the web component the global state of the
             Alpine Store Config.
           </p>
+
+          <div
+          x-data="{ code: window.spToggleSwitchCode, highlightCode($el) { Prism.highlightElement($el); } }"
+        >
+          <template x-for="item in [code]" :key="item">
+            <pre><code x-text="item" class="language-javascript" x-ref="codeBlock" x-init="highlightCode($refs.codeBlock)"></code></pre>
+          </template>
+        </div>
+
           <p>
             For example, the current value of the toggle switch is:
             <span class="font-bold" x-text="$store.config.toggleOn"></span>
